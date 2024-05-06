@@ -29,7 +29,7 @@ struct ContentView: View {
                         GridRow{
                             ForEach(0..<row, id: \.self){ _ in
                                 Rectangle()
-                                    .frame(width: block_width,height: block_height)
+                                    .frame(width: block_width, height: block_height)
                                     .foregroundColor(.blue)
                             }
                         }
@@ -47,6 +47,9 @@ struct ContentView: View {
                 alignment: .topLeading
             )
             .border(.blue,width:1)
+            Circle()
+                .foregroundColor(.blue)
+                .frame(width: 50, height: 50)
         }
     }
 }
