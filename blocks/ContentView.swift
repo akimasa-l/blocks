@@ -14,17 +14,20 @@ struct ContentView: View {
             let block_width: CGFloat = 125;
             let block_height: CGFloat = 25;
             let spacing: CGFloat = 10;
+            let border_width: CGFloat = 1;
             
             
-            let row = Int(floor((geometry.size.width - spacing*2)/(block_width+spacing)))
+            let row = Int(floor((geometry.size.width - spacing*2 - 2)/(block_width+spacing)))
             let column = min(3, Int(floor(geometry.size.height/(block_height+spacing))))
-            let x_space = (geometry.size.width - ((block_width+spacing)*CGFloat(row) - spacing))/2
+            let x_space = (geometry.size.width - border_width*2 - ((block_width+spacing)*CGFloat(row) - spacing))/2
+            
+            
             
             VStack{
                 Grid(horizontalSpacing: spacing, verticalSpacing: spacing){
-                    ForEach(0..<column,id: \.self){ _ in
+                    ForEach(0..<column, id: \.self){ _ in
                         GridRow{
-                            ForEach(0..<row,id: \.self){ _ in
+                            ForEach(0..<row, id: \.self){ _ in
                                 Rectangle()
                                     .frame(width: block_width,height: block_height)
                                     .foregroundColor(.blue)
@@ -36,6 +39,14 @@ struct ContentView: View {
                 .padding(.top, 20)
                 // Text("width: \(geometry.size.width), height: \(geometry.size.height)")
             }
+            .frame(
+                minWidth: 0,
+                maxWidth: .infinity,
+                minHeight: 0,
+                maxHeight: .infinity,
+                alignment: .topLeading
+            )
+            .border(.blue,width:1)
         }
     }
 }
