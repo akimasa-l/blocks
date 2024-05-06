@@ -25,7 +25,8 @@ struct ContentView: View {
                     ForEach(0..<column,id: \.self){ _ in
                         GridRow{
                             ForEach(0..<row,id: \.self){ _ in
-                                Rectangle().frame(width: block_width,height: block_height)
+                                Rectangle()
+                                    .frame(width: block_width,height: block_height)
                                     .foregroundColor(.blue)
                             }
                         }
