@@ -10,21 +10,30 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         GeometryReader{ geometry in
-            let column = min(3, Int(floor(geometry.size.height/25)))
-            let row = Int(floor(geometry.size.width/105))
-            let x_space = (geometry.size.width - CGFloat(row * 105 - 5))/2
+            // どうやらCGFloatはFloatかDoubleかのどちらからしい
+            let block_width: CGFloat = 125;
+            let block_height: CGFloat = 25;
+            let spacing: CGFloat = 10;
+            
+            
+            let row = Int(floor((geometry.size.width - spacing*2)/(block_width+spacing)))
+            let column = min(3, Int(floor(geometry.size.height/(block_height+spacing))))
+            let x_space = (geometry.size.width - ((block_width+spacing)*CGFloat(row) - spacing))/2
             
             VStack{
-                Grid(horizontalSpacing: 5, verticalSpacing: 5){
+                Grid(horizontalSpacing: spacing, verticalSpacing: spacing){
                     ForEach(0..<column,id: \.self){ _ in
                         GridRow{
                             ForEach(0..<row,id: \.self){ _ in
-                                Rectangle().frame(width: 100,height: 20).foregroundColor(.blue)
+                                Rectangle().frame(width: block_width,height: block_height)
+                                    .foregroundColor(.blue)
                             }
                         }
                     }
-                }.padding([.leading, .trailing], x_space)
-                Text("width: \(geometry.size.width), height: \(geometry.size.height)")
+                }
+                .padding(.horizontal, x_space)
+                .padding(.top, 20)
+                // Text("width: \(geometry.size.width), height: \(geometry.size.height)")
             }
         }
     }
