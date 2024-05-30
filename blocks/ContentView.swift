@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var x: CGFloat = 0
+    @State var y: CGFloat = 0
     var body: some View {
         GeometryReader{ geometry in
             // どうやらCGFloatはFloatかDoubleかのどちらからしい
@@ -46,10 +48,11 @@ struct ContentView: View {
                 maxHeight: .infinity,
                 alignment: .topLeading
             )
-            .border(.blue,width:1)
+            .border(.green, width:1)
             Circle()
                 .foregroundColor(.blue)
                 .frame(width: 50, height: 50)
+                .position(x: x, y: y)
         }
     }
 }
